@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Transaction} from '../transaction.model';
 import {TransactionService} from '../transaction.service';
+import {SaldoService} from '../../shared/saldo.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -11,10 +12,13 @@ import {TransactionService} from '../transaction.service';
 export class AddTransactionComponent implements OnInit {
   // Uso de Reactive Forms para customizacao de validacoes
   addForm: FormGroup;
-  formSubmitAttempt: boolean = false;
+  formSubmitAttempt = false;
 
   private newTransaction: Transaction;
-  constructor(private transactionServicce: TransactionService) { }
+  constructor(
+    private transactionServicce: TransactionService,
+    private saldoService: SaldoService
+  ) { }
 
   ngOnInit() {
     this.addForm = new FormGroup({
@@ -26,7 +30,7 @@ export class AddTransactionComponent implements OnInit {
   private isValid(addForm: FormGroup) {
     if (addForm) {
       if (addForm.value.transactionType === 'saque') {
-        if (addForm.value.amount > this.transactionServicce.getBalance()) {
+        if (addForm.value.amount > this.saldoService.getBalance()) {
           return false;
         }
       }

@@ -1,7 +1,9 @@
 import {Transaction} from './transaction.model';
 import {Subject} from 'rxjs/Subject';
 import {SaldoService} from '../shared/saldo.service';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class TransactionService {
   private transactions: Transaction[] = [];
   transactionsChanged = new Subject<Transaction[]>();
