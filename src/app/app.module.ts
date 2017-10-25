@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './transactions/add-transaction/add-transaction.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AddTransactionComponent } from './transactions/add-transaction/add-tran
     AddTransactionComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
