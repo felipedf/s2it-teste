@@ -1,7 +1,8 @@
 import {Transaction} from './transaction.model';
 
 export class TransactionService {
-  private transactions: Transaction[];
+  private transactions: Transaction[] = [];
+  private balance: number = 0;
 
   getTransactions() {
     return this.transactions.slice();
@@ -17,5 +18,17 @@ export class TransactionService {
 
   deleteTransaction(index: number) {
     this.transactions.splice(index, 1);
+  }
+
+  getBalance() {
+    return this.balance;
+  }
+
+  addToBalance(num: number) {
+    this.balance += num;
+  }
+
+  subFromBalance(num: number) {
+    this.balance -= num;
   }
 }

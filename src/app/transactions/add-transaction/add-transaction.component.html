@@ -32,7 +32,7 @@
                 class="form-control"
                 placeholder="Valor">
               <span
-                *ngIf="!addForm.get('amount').valid && addForm.get('amount').dirty"
+                *ngIf="!addForm.get('amount').valid && addForm.get('amount').touched && formSubmitAttempt"
                 class="help-block">Saldo insuficiente!</span>
             </div>
           <div class="col-xs-1">

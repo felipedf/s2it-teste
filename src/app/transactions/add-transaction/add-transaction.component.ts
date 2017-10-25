@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Transaction} from '../transaction.model';
+import {TransactionService} from '../transaction.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -10,26 +11,51 @@ import {Transaction} from '../transaction.model';
 export class AddTransactionComponent implements OnInit {
   // Uso de Reactive Forms para customizacao de validacoes
   addForm: FormGroup;
+  formSubmitAttempt: boolean = false;
+
   private newTransaction: Transaction;
-  constructor() { }
+  constructor(private transactionServicce: TransactionService) { }
 
   ngOnInit() {
     this.addForm = new FormGroup({
-      'transactionType': new FormControl('deposito'),
-      'amount': new FormControl(null)
+      'transactionType': new FormControl('deposito', Validators.required),
+      'amount': new FormControl(null, Validators.required)
     });
   }
 
-  onSubmit() {
-    this.newTransaction = new Transaction(
-      this.addForm.value.transactionType,
-      this.addForm.value.amount
-    );
-
-    console.log(this.newTransaction);
+  private isValid(addForm: FormGroup) {
+    if (addForm) {
+      if (addForm.value.transactionType === 'saque') {
+        if (addForm.value.amount > this.transactionServicce.getBalance()) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
-  //
-  // checkBalance(control: FormControl): {[n: number]: boolean} {
-  // }
 
+  onSubmit() {
+    if (!this.addForm.valid) {
+      this.formSubmitAttempt = true;
+    } else if (this.isValid(this.addForm)) {
+        this.newTransaction = new Transaction(
+          this.addForm.value.transactionType,
+          this.addForm.value.amount
+        );
+        this.transactionServicce.addTransaction(this.newTransaction);
+    } else {
+      alert('Saldo insuficiente!');
+    }
+
+    console.log(this.addForm);
+    this.reset();
+  }
+
+  reset() {
+    this.addForm.reset();
+    this.addForm.patchValue({
+      'transactionType': 'deposito'
+    });
+    this.formSubmitAttempt = false;
+  }
 }
