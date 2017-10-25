@@ -1,10 +1,12 @@
 import {Transaction} from './transaction.model';
 import {Subject} from 'rxjs/Subject';
+import {SaldoService} from '../shared/saldo.service';
 
 export class TransactionService {
   private transactions: Transaction[] = [];
-  private balance = 0;
   transactionsChanged = new Subject<Transaction[]>();
+
+  constructor(private saldoService: SaldoService) {}
 
   getTransactions() {
     return this.transactions.slice();
@@ -22,17 +24,5 @@ export class TransactionService {
   deleteTransaction(index: number) {
     this.transactions.splice(index, 1);
     this.transactionsChanged.next(this.transactions.slice());
-  }
-
-  getBalance() {
-    return this.balance;
-  }
-
-  addToBalance(num: number) {
-    this.balance += num;
-  }
-
-  subFromBalance(num: number) {
-    this.balance -= num;
   }
 }

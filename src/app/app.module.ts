@@ -6,8 +6,8 @@ import { HeaderComponent } from './header/header.component';
 import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './transactions/add-transaction/add-transaction.component';
+import {SaldoService} from './shared/saldo.service';
 import {ReactiveFormsModule} from '@angular/forms';
-import { SaldoComponent } from './saldo/saldo.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +15,13 @@ import { SaldoComponent } from './saldo/saldo.component';
     HeaderComponent,
     TransactionListComponent,
     TransactionsComponent,
-    AddTransactionComponent,
-    SaldoComponent
+    AddTransactionComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SaldoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
