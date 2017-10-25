@@ -46,8 +46,6 @@ export class AddTransactionComponent implements OnInit {
     } else {
       alert('Saldo insuficiente!');
     }
-
-    console.log(this.addForm);
     this.reset();
   }
 
