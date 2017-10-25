@@ -9,11 +9,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let transaction of getTransactions()">
-        <td *ngIf="transaction.type === 'deposito'">info</td>
-        <td *ngIf="transaction.type === 'saque'">danger</td>
-        <td>transaction.type</td>
-        <td>transaction.amount</td>
+      <tr *ngFor="let transaction of transactions">
+        <td [class]="transaction.type === 'deposito' ? 'success' : 'danger'">{{ transaction.type }}</td>
+        <td>{{ transaction.amount }}</td>
       </tr>
       </tbody>
     </table>
