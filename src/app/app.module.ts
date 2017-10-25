@@ -7,6 +7,7 @@ import { TransactionListComponent } from './transactions/transaction-list/transa
 import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './transactions/add-transaction/add-transaction.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SaldoComponent } from './saldo/saldo.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     HeaderComponent,
     TransactionListComponent,
     TransactionsComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    SaldoComponent
   ],
   imports: [
     BrowserModule,
