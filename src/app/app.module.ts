@@ -8,6 +8,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { AddTransactionComponent } from './transactions/add-transaction/add-transaction.component';
 import {SaldoService} from './shared/saldo.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CurrencyMaskModule
   ],
   providers: [SaldoService],
   bootstrap: [AppComponent]

@@ -3,15 +3,18 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th>Tipo</th>
-        <th>Valor</th>
+        <th>Tipo <span class="caret"></span></th>
+        <th>Valor <span class="caret"></span></th>
         <th><span class="caret"></span></th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let transaction of transactions">
-        <td [class]="transaction.type === 'deposito' ? 'success' : 'danger'">{{ transaction.type }}</td>
-        <td>{{ transaction.amount }}</td>
+      <tr *ngFor="let transaction of transactions; let i = index"
+          [class]="transaction.type === 'deposito' ? 'success' : 'danger'"
+      >
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.amount | currency:'USD':true:'1.2-2' }}</td>
+        <td><a style="cursor: pointer" (click)="onRemoveTransaction(i)"> Remover</a></td>
       </tr>
       </tbody>
     </table>

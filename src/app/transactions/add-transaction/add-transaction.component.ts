@@ -39,6 +39,7 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.addForm.value.amount);
     if (!this.addForm.valid) {
       this.formSubmitAttempt = true;
     } else if (this.isValid(this.addForm)) {
@@ -47,10 +48,11 @@ export class AddTransactionComponent implements OnInit {
           this.addForm.value.amount
         );
         this.transactionServicce.addTransaction(this.newTransaction);
+      this.reset();
     } else {
       alert('Saldo insuficiente!');
+      this.reset();
     }
-    this.reset();
   }
 
   reset() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TransactionService} from './transaction.service';
+import {SaldoService} from "../shared/saldo.service";
 
 @Component({
   selector: 'app-transactions',
@@ -9,9 +10,12 @@ import {TransactionService} from './transaction.service';
 })
 export class TransactionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private saldoService: SaldoService) { }
 
   ngOnInit() {
   }
 
+  printSaldo() {
+    return this.saldoService.getBalance();
+  }
 }

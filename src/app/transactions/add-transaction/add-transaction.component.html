@@ -26,16 +26,18 @@
             </div>
             <div class="col-xs-5">
               <input
-                type="text"
-                id="amont"
+                min="1"
+                id="amount"
                 formControlName="amount"
                 class="form-control"
+                [ngClass]="{'ng-addSubmited': formSubmitAttempt}"
+                currencyMask
                 placeholder="Valor">
               <span
-                *ngIf="!addForm.get('amount').valid && addForm.get('amount').touched && formSubmitAttempt"
-                class="help-block">Saldo insuficiente!</span>
+                *ngIf="!addForm.get('amount').valid && formSubmitAttempt"
+                class="help-block" style="color: red;">Insira um valor !</span>
             </div>
-          <div class="col-xs-1">
+          <div class="col-xs-2">
             <button
               type="submit"
               class="btn btn-success"
