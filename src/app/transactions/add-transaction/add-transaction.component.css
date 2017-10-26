@@ -1,3 +1,8 @@
 input.ng-invalid.ng-addSubmited {
   border: 1px solid red;
 }
+
+.form-group {
+  display: inline-block;
+  padding-right: 50px;
+}
