@@ -5,4 +5,5 @@ input.ng-invalid.ng-addSubmited {
 .form-group {
   display: inline-block;
   padding-right: 50px;
+  padding-left: 12px;
 }
