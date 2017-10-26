@@ -16,20 +16,20 @@ export class AddTransactionComponent implements OnInit {
 
   private newTransaction: Transaction;
   constructor(
-    private transactionServicce: TransactionService,
-    private saldoService: SaldoService
+    private saldoService: SaldoService,
+    private transactionService: TransactionService
   ) { }
 
   ngOnInit() {
     this.addForm = new FormGroup({
-      'transactionType': new FormControl('deposito', Validators.required),
+      'transactionType': new FormControl(TransactionService.DEPOSITO, Validators.required),
       'amount': new FormControl(null, Validators.required)
     });
   }
 
   private isValid(addForm: FormGroup) {
     if (addForm) {
-      if (addForm.value.transactionType === 'saque') {
+      if (addForm.value.transactionType === TransactionService.SAQUE) {
         if (addForm.value.amount > this.saldoService.getBalance()) {
           return false;
         }
@@ -39,7 +39,6 @@ export class AddTransactionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addForm.value.amount);
     if (!this.addForm.valid) {
       this.formSubmitAttempt = true;
     } else if (this.isValid(this.addForm)) {
@@ -47,7 +46,7 @@ export class AddTransactionComponent implements OnInit {
           this.addForm.value.transactionType,
           this.addForm.value.amount
         );
-        this.transactionServicce.addTransaction(this.newTransaction);
+        this.transactionService.addTransaction(this.newTransaction);
       this.reset();
     } else {
       alert('Saldo insuficiente!');
@@ -58,7 +57,7 @@ export class AddTransactionComponent implements OnInit {
   reset() {
     this.addForm.reset();
     this.addForm.patchValue({
-      'transactionType': 'deposito'
+      'transactionType': TransactionService.DEPOSITO
     });
     this.formSubmitAttempt = false;
   }

@@ -1,7 +1,13 @@
 import {Transaction} from './transaction.model';
 import {Subject} from 'rxjs/Subject';
+import {SaldoService} from '../shared/saldo.service';
+import {Injectable} from '@angular/core';
+
 @Injectable()
 export class TransactionService {
+  static DEPOSITO = 'deposito';
+  static SAQUE = 'saque';
+
   private transactions: Transaction[] = [];
   transactionsChanged = new Subject<Transaction[]>();
 
@@ -18,7 +24,7 @@ export class TransactionService {
   addTransaction(transaction: Transaction) {
     this.transactions.push(transaction);
     this.transactionsChanged.next(this.transactions.slice());
-    this.saldoService.addBalance(transaction.type === 'deposito'
+    this.saldoService.addBalance(transaction.type === TransactionService.DEPOSITO
       ? +transaction.amount
       : -transaction.amount
     );
@@ -26,7 +32,7 @@ export class TransactionService {
 
   deleteTransaction(index: number) {
     const tempTransaction = this.transactions[index];
-    this.saldoService.addBalance(tempTransaction.type === 'deposito'
+    this.saldoService.addBalance(tempTransaction.type === TransactionService.DEPOSITO
       ? -tempTransaction.amount
       : +tempTransaction.amount
     );
@@ -34,6 +40,3 @@ export class TransactionService {
     this.transactionsChanged.next(this.transactions.slice());
   }
 }
-import {SaldoService} from '../shared/saldo.service';
-
-import {Injectable} from '@angular/core';
